@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">MNGR</string>
     <string name="welcome">Welcome</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="login">Log In</string>
+    <string name="create_new">or create a new account</string>
 </resources>
