@@ -3,7 +3,7 @@
     <string name="welcome">Welcome</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="remember_me">Remember Me</string>
+    <string name="remember_me">Remember Me?</string>
     <string name="login">Log In</string>
-    <string name="create_new">or create a new account</string>
+    <string name="new_user">New User?</string>
 </resources>

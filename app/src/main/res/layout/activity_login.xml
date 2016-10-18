@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
@@ -15,66 +16,72 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="15dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         android:layout_alignParentTop="true"
-        android:padding="12dp"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:text="@string/welcome"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/welcomeLabel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:gravity="center" />
-
-        <TextView
-            android:text="@string/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailLoginLabel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_height="0dp"
+            app:srcCompat="@drawable/logo_login"
+            android:layout_weight="1"
+            android:id="@+id/imageView3" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/emailLoginEditText" />
-
-        <TextView
-            android:text="@string/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/passwordLoginLabel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:hint="@string/email"
+            android:id="@+id/emailLoginEditText"
+            android:layout_marginTop="50dp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
+            android:hint="@string/password"
             android:id="@+id/passwordLoginEditText" />
 
         <CheckBox
             android:text="@string/remember_me"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:id="@+id/rememberMeCheckBox" />
-
-        <Button
-            android:text="@string/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/loginButton"
+            android:layout_marginBottom="50dp"
+            android:id="@+id/rememberMeCheckBox"
+            android:checked="true"
             android:layout_gravity="center" />
 
-        <TextView
-            android:text="@string/create_new"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/registerLabel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_gravity="center" />
+            android:layout_marginBottom="30dp">
+
+            <Button
+                android:text="@string/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginButton"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:layout_marginEnd="5dp"
+                android:textSize="18sp" />
+
+            <Button
+                android:text="@string/new_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signupButton"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorAccent"
+                android:layout_marginStart="5dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>
