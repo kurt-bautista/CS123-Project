@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void createAccount(View v) {
-        if(!validateForm()) return;
+        if(!validateForm()) return; //Check if fields are empty or if passwords don't match
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Create account?")
@@ -52,8 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(!task.isSuccessful()) Toast.makeText(RegisterActivity.this, "Account creation failed", Toast.LENGTH_SHORT).show();
                                         else {
-                                            mAuth.signOut();
-                                            finish();
+                                            mAuth.signOut(); //Signs out user after account creation and authentication
+                                            finish(); //Go back to login screen
                                         }
                                     }
                                 });
