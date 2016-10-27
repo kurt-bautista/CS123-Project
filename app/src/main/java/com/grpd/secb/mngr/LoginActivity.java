@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText =  (EditText) findViewById(R.id.passwordLoginEditText);
 
         mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -62,6 +63,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void register(View v) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
     }
 
     private boolean validateForm() {
