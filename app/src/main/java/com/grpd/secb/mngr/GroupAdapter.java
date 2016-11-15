@@ -52,6 +52,6 @@ public class GroupAdapter extends RealmBaseAdapter {
         Group group = groups.get(i);
         groupName.setText(group.getName());
         v.setTag(group);
-        return null;
+        return v;
     }
 }
