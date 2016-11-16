@@ -8,11 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.UUID;
+
+import io.realm.Realm;
+
 public class NewGroupDialog extends Dialog {
 
-    public NewGroupDialog(Context c) {
+    private GroupAdapter adapter;
+
+    public NewGroupDialog(Context c, GroupAdapter g) {
         super(c);
         setTitle("New Group");
+        this.adapter = g;
     }
 
     @Override
@@ -20,13 +27,24 @@ public class NewGroupDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_group_dialog);
 
-        EditText name = (EditText) findViewById(R.id.newGroupNameEditText);
-        EditText description = (EditText) findViewById(R.id.newGroupDescriptionEditText);
+        final EditText name = (EditText) findViewById(R.id.newGroupNameEditText);
+        final EditText description = (EditText) findViewById(R.id.newGroupDescriptionEditText);
         Button confirm = (Button) findViewById(R.id.createGroupButton);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        Group g = realm.createObject(Group.class, UUID.randomUUID().toString());
+                        //g.setId(UUID.randomUUID().toString());
+                        g.setName(name.getText().toString());
+                        g.setDescription(description.getText().toString());
+                    }
+                });
+                adapter.notifyDataSetChanged();
+                NewGroupDialog.this.dismiss();
             }
         });
     }

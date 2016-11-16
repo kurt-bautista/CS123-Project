@@ -20,7 +20,7 @@
     android:minHeight="?attr/actionBarSize"
     android:id="@+id/toolbar"
     app:theme="@style/ThemeOverlay.AppCompat.Light"
-    app:title="Sports" />
+    app:title="Groups" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -41,6 +41,7 @@
             android:layout_margin="16dp"
             android:layout_gravity="bottom|end"
             android:tint="@android:color/white"
+            android:onClick="newGroup"
             android:src="@drawable/ic_add_black_24dp"
             android:id="@+id/addGroupButton" />
 
