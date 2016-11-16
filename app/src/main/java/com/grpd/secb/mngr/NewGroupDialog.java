@@ -47,5 +47,12 @@ public class NewGroupDialog extends Dialog {
                 NewGroupDialog.this.dismiss();
             }
         });
+        Button cancel = (Button) findViewById(R.id.cancelButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NewGroupDialog.this.dismiss();
+            }
+        });
     }
 }
