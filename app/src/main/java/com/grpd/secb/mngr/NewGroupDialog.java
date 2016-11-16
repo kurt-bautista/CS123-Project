@@ -2,6 +2,7 @@ package com.grpd.secb.mngr;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,18 +34,27 @@ public class NewGroupDialog extends Dialog {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Realm realm = Realm.getDefaultInstance();
-                realm.executeTransaction(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        Group g = realm.createObject(Group.class, UUID.randomUUID().toString());
-                        //g.setId(UUID.randomUUID().toString());
-                        g.setName(name.getText().toString());
-                        g.setDescription(description.getText().toString());
-                    }
-                });
-                adapter.notifyDataSetChanged();
-                NewGroupDialog.this.dismiss();
+                if(name.getText().toString().trim().equals("")){
+                    new AlertDialog.Builder(view.getContext())
+                            .setTitle("No Group Name")
+                            .setMessage("Please input a group name.")
+                            .setNeutralButton("OK", null)
+                            .show();
+                }
+                else {
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            Group g = realm.createObject(Group.class, UUID.randomUUID().toString());
+                            //g.setId(UUID.randomUUID().toString());
+                            g.setName(name.getText().toString());
+                            g.setDescription(description.getText().toString());
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                    NewGroupDialog.this.dismiss();
+                }
             }
         });
         Button cancel = (Button) findViewById(R.id.cancelButton);
