@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.UUID;
 
@@ -16,11 +17,20 @@ import io.realm.Realm;
 public class NewGroupDialog extends Dialog {
 
     private GroupAdapter adapter;
+    private boolean isEdit;
+    private int index;
 
-    public NewGroupDialog(Context c, GroupAdapter g) {
+    public NewGroupDialog(Context c, GroupAdapter g, boolean isEdit, int index) {
         super(c);
-        setTitle("New Group");
+        if(!isEdit){
+            setTitle("New Group");
+        }
+        else{
+            setTitle("Edit Group");
+        }
         this.adapter = g;
+        this.isEdit = isEdit;
+        this.index = index;
     }
 
     @Override
@@ -30,6 +40,20 @@ public class NewGroupDialog extends Dialog {
 
         final EditText name = (EditText) findViewById(R.id.newGroupNameEditText);
         final EditText description = (EditText) findViewById(R.id.newGroupDescriptionEditText);
+
+        if(isEdit){
+
+            Realm realm = Realm.getDefaultInstance();
+
+            Group group = realm.where(Group.class).equalTo("id",adapter.getItem(index).getId()).findFirst();
+
+            System.out.println(group);
+
+            name.setText(group.getName());
+            description.setText(group.getDescription());
+
+        }
+
         Button confirm = (Button) findViewById(R.id.createGroupButton);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,15 +67,28 @@ public class NewGroupDialog extends Dialog {
                 }
                 else {
                     Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            Group g = realm.createObject(Group.class, UUID.randomUUID().toString());
-                            //g.setId(UUID.randomUUID().toString());
-                            g.setName(name.getText().toString());
-                            g.setDescription(description.getText().toString());
-                        }
-                    });
+                    if(isEdit){
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                Group g = realm.where(Group.class).equalTo("id",adapter.getItem(index).getId()).findFirst();
+                                //g.setId(UUID.randomUUID().toString());
+                                g.setName(name.getText().toString());
+                                g.setDescription(description.getText().toString());
+                            }
+                        });
+                    }
+                    else{
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                Group g = realm.createObject(Group.class, UUID.randomUUID().toString());
+                                //g.setId(UUID.randomUUID().toString());
+                                g.setName(name.getText().toString());
+                                g.setDescription(description.getText().toString());
+                            }
+                        });
+                    }
                     adapter.notifyDataSetChanged();
                     NewGroupDialog.this.dismiss();
                 }

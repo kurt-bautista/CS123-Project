@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -32,10 +33,20 @@ public class GroupsActivity extends AppCompatActivity {
         RealmResults<Group> groups = realm.where(Group.class).findAll();
         adapter = new GroupAdapter(this, groups);
         lv.setAdapter(adapter);
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int index, long l) {
+
+                GroupSelectDialog d = new GroupSelectDialog(GroupsActivity.this, adapter, index);
+                d.show();
+
+                return true;
+            }
+        });
     }
 
     public void newGroup(View view) {
-        NewGroupDialog d = new NewGroupDialog(this, adapter);
+        NewGroupDialog d = new NewGroupDialog(this, adapter,false, 0);
         d.show();
     }
 
