@@ -1,6 +1,7 @@
 package com.grpd.secb.mngr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,16 +52,7 @@ public class GroupsActivity extends AppCompatActivity {
         RealmResults<Group> groups = realm.where(Group.class).findAll();
         adapter = new GroupAdapter(this, groups);
         lv.setAdapter(adapter);
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int index, long l) {
 
-                GroupSelectDialog d = new GroupSelectDialog(GroupsActivity.this, adapter, index);
-                d.show();
-
-                return true;
-            }
-        });
     }
 
     public void newGroup(View view) {

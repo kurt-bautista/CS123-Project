@@ -1,15 +1,15 @@
 package com.grpd.secb.mngr;
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
-import io.realm.OrderedRealmCollection;
 import io.realm.RealmBaseAdapter;
-import io.realm.RealmModel;
 import io.realm.RealmResults;
 
 /**
@@ -20,11 +20,13 @@ public class GroupAdapter extends RealmBaseAdapter {
 
     private Activity context;
     private RealmResults<Group> groups;
+    private final GroupAdapter me;
 
     public GroupAdapter(@NonNull Activity context, @Nullable RealmResults<Group> groups) {
         super(context, groups);
         this.context = context;
         this.groups = groups;
+        me = this;
     }
 
     @Override
@@ -49,7 +51,33 @@ public class GroupAdapter extends RealmBaseAdapter {
         TextView groupName = (TextView) v.findViewById(R.id.groupNameTextView);
         TextView groupMemberCount = (TextView) v.findViewById(R.id.memberCountTextView);
 
-        Group group = groups.get(i);
+        final int index = i;
+        final Group group = groups.get(i);
+        v.setOnClickListener(new AdapterView.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context.getApplicationContext(), ViewGroupActivity.class);
+                i.putExtra("id",group.getId());
+                context.startActivity(i);
+            }
+        });
+
+        v.setOnLongClickListener(new AdapterView.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view) {
+
+                System.out.println(context.getApplicationContext());
+                System.out.println(me);
+                System.out.println(index);
+
+                GroupSelectDialog d = new GroupSelectDialog(context, me, index);
+                d.show();
+
+                return true;
+            }
+        });
+
+
         groupName.setText(group.getName());
         v.setTag(group);
         return v;
