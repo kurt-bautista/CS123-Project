@@ -30,7 +30,7 @@ public class MemberViewAdapter extends RealmBaseAdapter {
 
     @Override
     public int getCount() {
-        return members.size();
+        return members.size()+1;
     }
 
     @Nullable
@@ -54,20 +54,21 @@ public class MemberViewAdapter extends RealmBaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View v = null;
-
-        Member member = members.get(i);
-
+        Member member = null;
+        if(members.size() != 0) {
+            member = members.get(i);
+        }
         if (i < members.size()){
-            v = context.getLayoutInflater().inflate(R.layout.group_row, null);
+            View v = inflater.inflate(R.layout.member_row, null);
+            v.setTag(member);
+            return v;
         }
         else {
-            v = context.getLayoutInflater().inflate(R.layout.bottom_member_view, null);
+            View v = inflater.inflate(R.layout.bottom_member_view, null);
             ImageView img = (ImageView)context.findViewById(R.id.imageView3);
+            v.setTag(member);
+            return v;
         }
 
-
-        v.setTag(member);
-        return v;
     }
 }

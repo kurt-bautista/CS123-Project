@@ -53,7 +53,6 @@ public class ViewGroupActivity extends AppCompatActivity {
         sportView.setText(realm.where(Sport.class).equalTo("id",group.getSport_id()).findFirst().getName());
 
         ListView lv = (ListView)findViewById(R.id.memberListView);
-        lv.setBackgroundColor(Color.BLUE);
         lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll()));
 
     }

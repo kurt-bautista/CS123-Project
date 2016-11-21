@@ -52,6 +52,27 @@ public class GroupsActivity extends AppCompatActivity {
         RealmResults<Group> groups = realm.where(Group.class).findAll();
         adapter = new GroupAdapter(this, groups);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), ViewGroupActivity.class);
+                intent.putExtra("id",adapter.getItem(i).getId());
+                startActivity(intent);
+            }
+        });
+
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                GroupSelectDialog d = new GroupSelectDialog(GroupsActivity.this,adapter,i);
+                d.show();
+
+                return true;
+            }
+        });
 
     }
 

@@ -20,19 +20,18 @@ public class GroupAdapter extends RealmBaseAdapter {
 
     private Activity context;
     private RealmResults<Group> groups;
-    private final GroupAdapter me;
 
     public GroupAdapter(@NonNull Activity context, @Nullable RealmResults<Group> groups) {
         super(context, groups);
         this.context = context;
         this.groups = groups;
-        me = this;
     }
 
     @Override
     public int getCount() {
         return groups.size();
     }
+
 
     @Nullable
     @Override
@@ -51,31 +50,8 @@ public class GroupAdapter extends RealmBaseAdapter {
         TextView groupName = (TextView) v.findViewById(R.id.groupNameTextView);
         TextView groupMemberCount = (TextView) v.findViewById(R.id.memberCountTextView);
 
-        final int index = i;
-        final Group group = groups.get(i);
-        v.setOnClickListener(new AdapterView.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context.getApplicationContext(), ViewGroupActivity.class);
-                i.putExtra("id",group.getId());
-                context.startActivity(i);
-            }
-        });
+        Group group = groups.get(i);
 
-        v.setOnLongClickListener(new AdapterView.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View view) {
-
-                System.out.println(context.getApplicationContext());
-                System.out.println(me);
-                System.out.println(index);
-
-                GroupSelectDialog d = new GroupSelectDialog(context, me, index);
-                d.show();
-
-                return true;
-            }
-        });
 
 
         groupName.setText(group.getName());
