@@ -34,8 +34,9 @@
             android:id="@+id/editGroup"
             android:text="Edit Group"
             android:gravity="center_horizontal"
-            android:background="@color/colorDivider"
-            android:textSize="24sp" />
+            android:background="@color/colorAccent"
+            android:textSize="24sp"
+            android:textColor="@android:color/background_light" />
 
 
         //TODO: Add functionality for this option.
