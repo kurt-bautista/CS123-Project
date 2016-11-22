@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:icon="@drawable/icon"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".GroupsActivity">
             <intent-filter>
@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewGroupActivity"></activity>
+        <activity android:name=".ViewGroupActivity" />
+        <activity android:name=".ViewMemberActivity"></activity>
     </application>
 
 </manifest>
