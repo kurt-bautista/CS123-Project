@@ -76,7 +76,7 @@ public class NewGroupDialog extends Dialog {
                     new AlertDialog.Builder(view.getContext())
                             .setTitle("No Group Name")
                             .setMessage("Please input a group name.")
-                            .setNeutralButton("OK", null)
+                            .setPositiveButton("OK", null)
                             .show();
                 }
                 else {
