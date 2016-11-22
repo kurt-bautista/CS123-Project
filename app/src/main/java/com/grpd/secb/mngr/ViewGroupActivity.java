@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import io.realm.Realm;
@@ -24,6 +25,16 @@ public class ViewGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_group);
+        TabHost tabHost = (TabHost) findViewById(R.id.TabHost);
+        tabHost.setup();
+        TabHost.TabSpec tabs = tabHost.newTabSpec("tab1");
+        tabs.setContent(R.id.tab1);
+        tabs.setIndicator("Members");
+        tabHost.addTab(tabs);
+        tabs = tabHost.newTabSpec("tab2");
+        tabs.setContent(R.id.tab2);
+        tabs.setIndicator("Stats");
+        tabHost.addTab(tabs);
         Intent i = getIntent();
         String group_id = i.getStringExtra("id");
 
