@@ -2,6 +2,7 @@ package com.grpd.secb.mngr;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -61,6 +62,15 @@ public class GroupSelectDialog extends Dialog {
             }
         });
 
+        final TextView viewGroup = (TextView) this.findViewById(R.id.viewGroup);
+        viewGroup.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(c, ViewGroupActivity.class);
+                intent.putExtra("id",adapter.getItem(index).getId());
+                c.startActivity(intent);
+            }
+        });
     }
 
 }
