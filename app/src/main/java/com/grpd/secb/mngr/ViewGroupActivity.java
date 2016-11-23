@@ -1,10 +1,13 @@
 package com.grpd.secb.mngr;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -63,8 +66,33 @@ public class ViewGroupActivity extends AppCompatActivity {
         descView.setText(desc);
         sportView.setText(realm.where(Sport.class).equalTo("id",group.getSport_id()).findFirst().getName());
 
-        ListView lv = (ListView)findViewById(R.id.memberListView);
+        final ListView lv = (ListView)findViewById(R.id.memberListView);
         lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll()));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                System.out.println(i + " -- " + lv.getAdapter().getCount());
+                if(i == lv.getAdapter().getCount()-1){
+
+                    NewMemberDialog d = new NewMemberDialog(ViewGroupActivity.this,group);
+                    d.show();
+
+                }
+
+            }
+        });
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Dialog d = new MemberSelectDialog(ViewGroupActivity.this,(MemberViewAdapter)lv.getAdapter(),i);
+                d.show();
+                return true;
+            }
+        });
 
     }
 

@@ -12,7 +12,7 @@ public class Member extends RealmObject {
 
     String id;
     String name;
-    Date birthday;
+    String birthday;
     int age;
     String height;
     String weight;
@@ -36,11 +36,11 @@ public class Member extends RealmObject {
         this.name = name;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

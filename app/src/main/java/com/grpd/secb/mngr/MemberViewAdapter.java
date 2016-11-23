@@ -55,11 +55,12 @@ public class MemberViewAdapter extends RealmBaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         Member member = null;
-        if(members.size() != 0) {
+
+        if (i > members.size()){
             member = members.get(i);
-        }
-        if (i < members.size()){
             View v = inflater.inflate(R.layout.member_row, null);
+            TextView name = (TextView)v.findViewById(R.id.rowMemberNameTextView);
+            name.setText(member.getName());
             v.setTag(member);
             return v;
         }
