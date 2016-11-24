@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -67,7 +68,7 @@ public class ViewGroupActivity extends AppCompatActivity {
         sportView.setText(realm.where(Sport.class).equalTo("id",group.getSport_id()).findFirst().getName());
 
         final ListView lv = (ListView)findViewById(R.id.memberListView);
-        lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll()));
+        lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll(),MemberViewAdapter.VIEW_GROUP));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -96,6 +97,17 @@ public class ViewGroupActivity extends AppCompatActivity {
                 Dialog d = new MemberSelectDialog(ViewGroupActivity.this,(MemberViewAdapter)lv.getAdapter(),i);
                 d.show();
                 return true;
+            }
+        });
+
+        Button newStat = (Button)findViewById(R.id.newStatButton);
+        newStat.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Dialog d = new NewStatDialog(ViewGroupActivity.this,group);
+                d.show();
+
             }
         });
 

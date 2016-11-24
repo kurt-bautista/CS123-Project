@@ -1,6 +1,7 @@
 package com.grpd.secb.mngr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,18 +20,31 @@ import io.realm.RealmResults;
 
 public class MemberViewAdapter extends RealmBaseAdapter {
 
-    private Activity context;
-    private RealmResults<Member> members;
+    public static int VIEW_GROUP = 0;
+    public static int NEW_STAT = 1;
 
-    public MemberViewAdapter(@NonNull Activity context, @Nullable RealmResults<Member> members) {
+
+    private RealmResults<Member> members;
+    private int type;
+
+    public MemberViewAdapter(@NonNull Context context, @Nullable RealmResults<Member> members, int type) {
         super(context, members);
-        this.context = context;
         this.members = members;
+        this.type = type;
     }
 
     @Override
     public int getCount() {
-        return members.size()+1;
+        if(type == VIEW_GROUP){
+
+            return members.size()+1;
+
+        }
+        else{
+
+            return members.size();
+
+        }
     }
 
     @Nullable
@@ -53,22 +67,39 @@ public class MemberViewAdapter extends RealmBaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         Member member = null;
+        View v = inflater.inflate(R.layout.member_row, null);;
+        TextView name = null;
+        switch(type){
 
-        if (i < members.size()){
-            member = members.get(i);
-            View v = inflater.inflate(R.layout.member_row, null);
-            TextView name = (TextView)v.findViewById(R.id.rowMemberNameTextView);
-            name.setText(member.getName());
-            v.setTag(member);
-            return v;
-        }
-        else {
-            View v = inflater.inflate(R.layout.bottom_member_view, null);
-            ImageView img = (ImageView)context.findViewById(R.id.imageView3);
-            v.setTag(member);
-            return v;
+            case 0:
+                if (i < members.size()){
+                    member = members.get(i);
+                    v = inflater.inflate(R.layout.member_row, null);
+                    name = (TextView)v.findViewById(R.id.rowMemberNameTextView);
+                    name.setText(member.getName());
+                    v.setTag(member);
+                    return v;
+                }
+                else {
+                    v = inflater.inflate(R.layout.bottom_member_view, null);
+                    v.setTag(member);
+                    return v;
+                }
+            case 1:
+                member = members.get(i);
+                v = inflater.inflate(R.layout.member_row, null);
+                name = (TextView)v.findViewById(R.id.rowMemberNameTextView);
+                name.setText(member.getName());
+                v.setTag(member);
+                return v;
+            default:
+                member = members.get(i);
+                v = inflater.inflate(R.layout.member_row, null);
+                name = (TextView)v.findViewById(R.id.rowMemberNameTextView);
+                name.setText(member.getName());
+                v.setTag(member);
+                return v;
         }
 
     }
