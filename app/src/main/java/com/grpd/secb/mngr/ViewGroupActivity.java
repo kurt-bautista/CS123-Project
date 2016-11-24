@@ -73,12 +73,17 @@ public class ViewGroupActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                System.out.println(i + " -- " + lv.getAdapter().getCount());
                 if(i == lv.getAdapter().getCount()-1){
 
-                    NewMemberDialog d = new NewMemberDialog(ViewGroupActivity.this,group);
+                    NewMemberDialog d = new NewMemberDialog(ViewGroupActivity.this,group,false,"");
                     d.show();
 
+                }
+                else{
+
+                    Intent intent = new Intent(ViewGroupActivity.this,ViewMemberActivity.class);
+                    intent.putExtra("id",((MemberViewAdapter)lv.getAdapter()).getItem(i).getId());
+                    startActivity(intent);
                 }
 
             }
