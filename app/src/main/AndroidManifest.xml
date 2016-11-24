@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".ViewGroupActivity" />
         <activity android:name=".ViewMemberActivity" />
-        <activity android:name=".TaekwondoStatTrackActivity"></activity>
+        <activity android:name=".TaekwondoStatTrackActivity" />
+        <activity android:name=".SwimmingStatTrackActivity"></activity>
     </application>
 
 </manifest>
