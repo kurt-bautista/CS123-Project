@@ -20,7 +20,9 @@
         <Chronometer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chronometer3" />
+            android:id="@+id/chronometer3"
+            android:textAlignment="center"
+            android:textSize="36sp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -32,20 +34,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button7"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
 
             <Button
                 android:text="Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button3"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <ViewStub
                 android:layout_width="match_parent"
@@ -70,14 +75,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button9"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
 
             <Button
                 android:text="Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button8"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
