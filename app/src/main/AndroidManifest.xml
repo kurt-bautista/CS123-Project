@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ViewGroupActivity" />
-        <activity android:name=".ViewMemberActivity"></activity>
+        <activity android:name=".ViewMemberActivity" />
+        <activity android:name=".TaekwondoStatTrackActivity"></activity>
     </application>
 
 </manifest>
