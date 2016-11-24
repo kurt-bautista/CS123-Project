@@ -27,12 +27,18 @@ import io.realm.Realm;
 public class NewMemberDialog extends Dialog{
 
     private Group group;
+    private boolean isEdit;
+    private Member member;
 
-    public NewMemberDialog(Context c, Group g) {
+    public NewMemberDialog(Context c, Group g, boolean isEdit, String memberId) {
         super(c);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         group = g;
+        this.isEdit = isEdit;
+        if(isEdit) {
+            member = Realm.getDefaultInstance().where(Member.class).equalTo("id", memberId).findFirst();
+        }
     }
 
     @Override
@@ -40,6 +46,24 @@ public class NewMemberDialog extends Dialog{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_member_dialog);
 
+
+        if(isEdit){
+
+            EditText name = (EditText)findViewById(R.id.newMemberNameEditText);
+            EditText height = (EditText)findViewById(R.id.newMemberHeightEditText);
+            EditText weight = (EditText)findViewById(R.id.newMemberWeightEditText);
+            EditText age = (EditText)findViewById(R.id.newMemberAgeEditText);
+            EditText contactNumber = (EditText)findViewById(R.id.newMemberContactEditText);
+            TextView birthday = (TextView)findViewById(R.id.newMemberBirthdayTextView);
+
+            name.setText(member.getName());
+            height.setText(member.getHeight());
+            weight.setText(member.getWeight());
+            age.setText(Integer.toString(member.getAge()));
+            contactNumber.setText(member.getContact_number());
+            birthday.setText(member.getBirthday());
+
+        }
         final TextView birthdayView = (TextView) findViewById(R.id.newMemberBirthdayTextView);
         final EditText ageView = (EditText) findViewById(R.id.newMemberAgeEditText);
         Button pick = (Button) findViewById(R.id.datePicker);
@@ -103,19 +127,40 @@ public class NewMemberDialog extends Dialog{
                 }
                 else{
 
-                    Realm realm = Realm.getDefaultInstance();
-                    realm.beginTransaction();
-                    Member m = realm.createObject(Member.class);
-                    m.setId(UUID.randomUUID().toString());
-                    m.setName(name.getText().toString());
-                    m.setGroup_id(group.getId());
-                    m.setHeight(height.getText().toString());
-                    m.setWeight(weight.getText().toString());
-                    m.setAge(Integer.parseInt(age.getText().toString()));
-                    m.setBirthday(birthday.getText().toString());
-                    m.setOther_description(((EditText)findViewById(R.id.newMemberDescriptionEditText)).getText().toString());
-                    realm.commitTransaction();
-                    NewMemberDialog.this.dismiss();
+                    if(isEdit){
+
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        member.setName(name.getText().toString());
+                        member.setGroup_id(group.getId());
+                        member.setHeight(height.getText().toString());
+                        member.setWeight(weight.getText().toString());
+                        member.setAge(Integer.parseInt(age.getText().toString()));
+                        member.setContact_number(contactNumber.getText().toString());
+                        member.setBirthday(birthday.getText().toString());
+                        member.setOther_description(((EditText)findViewById(R.id.newMemberDescriptionEditText)).getText().toString());
+                        realm.commitTransaction();
+                        NewMemberDialog.this.dismiss();
+
+                    }
+                    else {
+
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        Member m = realm.createObject(Member.class);
+                        m.setId(UUID.randomUUID().toString());
+                        m.setName(name.getText().toString());
+                        m.setGroup_id(group.getId());
+                        m.setHeight(height.getText().toString());
+                        m.setWeight(weight.getText().toString());
+                        m.setAge(Integer.parseInt(age.getText().toString()));
+                        m.setContact_number(contactNumber.getText().toString());
+                        m.setBirthday(birthday.getText().toString());
+                        m.setOther_description(((EditText)findViewById(R.id.newMemberDescriptionEditText)).getText().toString());
+                        realm.commitTransaction();
+                        NewMemberDialog.this.dismiss();
+
+                    }
                 }
 
             }

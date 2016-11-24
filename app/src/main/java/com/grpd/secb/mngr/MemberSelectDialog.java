@@ -50,7 +50,8 @@ public class MemberSelectDialog extends Dialog {
         editMember.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Dialog d = new NewMemberDialog(c,realm.where(Group.class).equalTo("id",adapter.getItem(index).getGroup_id()).findFirst());
+                Dialog d = new NewMemberDialog(c,realm.where(Group.class).equalTo("id",adapter.getItem(index).getGroup_id()).findFirst(),true,
+                        realm.where(Member.class).equalTo("id",adapter.getItem(index).getId()).findFirst().getId());
                 d.show();
                 MemberSelectDialog.this.dismiss();
             }
@@ -60,9 +61,9 @@ public class MemberSelectDialog extends Dialog {
         viewMember.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(c, ViewGroupActivity.class);
-                //intent.putExtra("id",adapter.getItem(index).getId());
-                //c.startActivity(intent);
+                Intent intent = new Intent(c, ViewMemberActivity.class);
+                intent.putExtra("id",adapter.getItem(index).getId());
+                c.startActivity(intent);
             }
         });
     }
