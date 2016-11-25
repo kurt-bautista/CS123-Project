@@ -17,12 +17,14 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <Chronometer
+        <TextView
+            android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chronometer3"
-            android:textAlignment="center"
-            android:textSize="36sp" />
+            android:id="@+id/textView12"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="36sp"
+            android:textAlignment="center" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -56,13 +58,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout="@layout/swimmer_row"
-                android:id="@+id/viewStub3" />
+                android:id="@+id/viewStub3"
+                android:layout_gravity="center" />
 
             <ViewStub
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout="@layout/swimmer_row"
-                android:id="@+id/viewStub4" />
+                android:id="@+id/viewStub4"
+                android:layout_gravity="center" />
         </LinearLayout>
 
         <LinearLayout
