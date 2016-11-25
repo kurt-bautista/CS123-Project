@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Title"
+            android:hint="Title"
             android:ems="10"
             android:id="@+id/sessionTitleEditText"
             android:layout_weight="1" />
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="data"
+            android:hint="datatype"
             android:ems="10"
             android:id="@+id/sessionDataEditText"
             android:layout_weight="1" />
@@ -88,7 +88,7 @@
         android:layout_marginTop="40dp">
 
         <TextView
-            android:text="Search Members"
+            android:text="Select Members"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView7"

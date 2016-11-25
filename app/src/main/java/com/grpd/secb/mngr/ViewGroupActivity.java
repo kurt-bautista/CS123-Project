@@ -159,6 +159,8 @@ public class ViewGroupActivity extends AppCompatActivity {
         final ExpandableListView elv = (ExpandableListView)findViewById(R.id.statRecordListView);
         final StatRecordAdapter adapter =new StatRecordAdapter(ViewGroupActivity.this,statRecords);
 
+
+
         elv.setAdapter(adapter);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override

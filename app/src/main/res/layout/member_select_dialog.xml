@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/activity_horizontal_margin"
             android:id="@+id/delMember"
-            android:text="Delete member"
+            android:text="Delete Member"
             android:gravity="center_horizontal"
             android:textSize="24sp" />
 

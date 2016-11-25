@@ -169,6 +169,8 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                             startStop.setEnabled(false);
                             isActive = false;
                             startStop.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                            curMinutes = 0;
+                            curSeconds = 0;
                             timerDisplay.setText(f.format(0)+ ":" + f.format(0));
                         }
                     };
@@ -205,6 +207,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                         long minutes, seconds;
                         if(curMinutes != 0 || curSeconds != 0){
 
+
                             minutes = ((timerSet/1000)/60)-curMinutes;
                             seconds = ((timerSet/1000)%60)-curSeconds;
 
@@ -218,11 +221,13 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                         }
                         else{
 
+
                             minutes = ((timerSet/1000)/60);
                             seconds = ((timerSet/1000)%60);
                         }
+
                         tracker.addStat(dataName,counterDisplay.getText().toString() + " in " + f.format(minutes) + ":" + f.format(seconds),id);
-                        System.out.println(id + ": " + counterDisplay.getText().toString() + " in " + f.format(minutes) + ":" + f.format(seconds));
+
 
                     }
                 }
@@ -246,7 +251,6 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
         else{
             timer.cancel();
             isActive = false;
-            System.out.println(curMinutes + " - " + curSeconds);
             startStop.setImageResource(R.drawable.ic_play_arrow_black_24dp);
         }
     }

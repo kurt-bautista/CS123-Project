@@ -10,7 +10,6 @@ public class MemberStatRecord extends RealmObject {
 
     String id;
     String member_id;
-    String stat_type_id;
     String stat_record_id;
 
     public String getId() {
@@ -27,14 +26,6 @@ public class MemberStatRecord extends RealmObject {
 
     public void setMember_id(String member_id) {
         this.member_id = member_id;
-    }
-
-    public String getStat_type_id() {
-        return stat_type_id;
-    }
-
-    public void setStat_type_id(String stat_type_id) {
-        this.stat_type_id = stat_type_id;
     }
 
     public String getStat_record_id() {
