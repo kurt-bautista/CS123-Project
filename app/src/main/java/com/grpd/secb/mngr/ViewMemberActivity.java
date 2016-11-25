@@ -104,8 +104,7 @@ public class ViewMemberActivity extends AppCompatActivity {
             @Override
             public void onTabChanged(String s) {
                 adapter.notifyDataSetChanged();
-                elv.invalidate();
-                elv.postInvalidate();
+                elv.invalidateViews();
             }
         });
 

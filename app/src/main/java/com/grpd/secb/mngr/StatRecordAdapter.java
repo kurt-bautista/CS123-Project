@@ -77,6 +77,12 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
         return v;
     }
 
+    public RealmList<StatRecord> getData(){
+
+        return records;
+
+    }
+
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
 

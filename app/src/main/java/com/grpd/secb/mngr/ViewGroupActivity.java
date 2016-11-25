@@ -36,7 +36,7 @@ public class ViewGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_group);
-        TabHost tabHost = (TabHost) findViewById(R.id.TabHost);
+        final TabHost tabHost = (TabHost) findViewById(R.id.TabHost);
         tabHost.setup();
         TabHost.TabSpec tabs = tabHost.newTabSpec("tab1");
         tabs.setContent(R.id.tab1);
@@ -114,6 +114,7 @@ public class ViewGroupActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Dialog d = new NewStatDialog(ViewGroupActivity.this,group);
+                tabHost.setCurrentTab(0);
                 d.show();
 
             }
@@ -162,7 +163,45 @@ public class ViewGroupActivity extends AppCompatActivity {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String s) {
-                adapter.notifyDataSetChanged();
+                RealmResults<Member> memberList = realm.where(Member.class).equalTo("group_id",group.getId()).findAll();
+                ArrayList<RealmResults<MemberStatRecord>> msrList = new ArrayList<>();
+                ArrayList<RealmResults<StatRecord>> srList = new ArrayList<>();
+
+                for(Member m : memberList){
+
+                    msrList.add(realm.where(MemberStatRecord.class).equalTo("member_id",m.getId()).findAll());
+
+                }
+
+                for(RealmResults<MemberStatRecord> resultList : msrList){
+
+                    for(MemberStatRecord result : resultList){
+
+                        srList.add(realm.where(StatRecord.class).equalTo("id",result.getStat_record_id()).findAll());
+
+                    }
+
+                }
+
+                RealmList<StatRecord> statRecords = new RealmList<>();
+
+                for(RealmResults<StatRecord> srResults : srList){
+
+                    for(StatRecord result : srResults){
+
+                        if(!statRecords.contains(result)){
+
+                            statRecords.add(result);
+
+                        }
+                    }
+
+                }
+
+                adapter.getData().clear();
+                adapter.getData().addAll(statRecords);
+
+                elv.invalidateViews();
             }
         });
 
