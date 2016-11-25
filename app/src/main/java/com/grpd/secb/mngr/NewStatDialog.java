@@ -104,6 +104,7 @@ public class NewStatDialog extends Dialog {
                     int count = 0;
                     for(Member member:selectedMembers){
                         ids[count] = member.getId();
+                        System.out.println(member.getName());
                         count++;
                     }
 

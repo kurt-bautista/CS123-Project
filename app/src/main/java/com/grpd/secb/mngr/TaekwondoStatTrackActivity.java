@@ -218,7 +218,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                             seconds = ((timerSet/1000)%60);
                         }
                         tracker.addStat(dataName,counterDisplay.getText().toString() + " in " + f.format(minutes) + ":" + f.format(seconds),id);
-                        System.out.println(counterDisplay.getText().toString() + " in " + f.format(minutes) + ":" + f.format(seconds));
+                        System.out.println(id + ": " + counterDisplay.getText().toString() + " in " + f.format(minutes) + ":" + f.format(seconds));
 
                     }
                 }

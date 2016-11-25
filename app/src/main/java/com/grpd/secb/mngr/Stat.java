@@ -12,6 +12,15 @@ public class Stat extends RealmObject {
     String name;
     String record;
     String member_stat_record_id;
+    String stat_record_id;
+
+    public String getStat_record_id() {
+        return stat_record_id;
+    }
+
+    public void setStat_record_id(String stat_record_id) {
+        this.stat_record_id = stat_record_id;
+    }
 
     public String getId() {
         return id;

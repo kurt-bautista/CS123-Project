@@ -1,7 +1,5 @@
 package com.grpd.secb.mngr;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -18,6 +16,7 @@ public class StatSessionTracker{
     private Realm realm;
     private Calendar c;
     private String sessionTitle;
+    private StatRecord statRecord;
 
     public StatSessionTracker(RealmResults<MemberStatRecord> records,String sessionTitle){
 
@@ -31,13 +30,17 @@ public class StatSessionTracker{
 
     private void createStatRecords(){
 
+        realm.beginTransaction();
+        StatRecord sr = realm.createObject(StatRecord.class);
+        sr.setId(UUID.randomUUID().toString());
+        sr.setName(sessionTitle);
+        sr.setDate((c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR));
+        realm.commitTransaction();
+
+        statRecord = sr;
         for(MemberStatRecord record: records){
 
             realm.beginTransaction();
-            StatRecord sr = realm.createObject(StatRecord.class);
-            sr.setId(UUID.randomUUID().toString());
-            sr.setName(sessionTitle);
-            sr.setDate((c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.YEAR));
             record.setStat_record_id(sr.getId());
             realm.commitTransaction();
 
@@ -54,6 +57,7 @@ public class StatSessionTracker{
         stat.setId(UUID.randomUUID().toString());
         stat.setName(name);
         stat.setMember_stat_record_id(record.getId());
+        stat.setStat_record_id(statRecord.getId());
         realm.commitTransaction();
 
     }
