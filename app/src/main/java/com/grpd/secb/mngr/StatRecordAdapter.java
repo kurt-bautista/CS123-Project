@@ -1,6 +1,8 @@
 package com.grpd.secb.mngr;
 
 import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -18,9 +20,9 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
 
     private RealmList<StatRecord> records;
     private Realm realm = Realm.getDefaultInstance();
-    private Activity context;
+    private Context context;
 
-    public StatRecordAdapter(Activity context, RealmList<StatRecord> records){
+    public StatRecordAdapter(Context context, RealmList<StatRecord> records){
 
         this.records = records;
         this.context = context;
@@ -64,7 +66,7 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        View v = context.getLayoutInflater().inflate(R.layout.stat_parent,null);
+        View v = LayoutInflater.from(context).inflate(R.layout.stat_parent,null);
 
         StatRecord sr = records.get(i);
 
@@ -86,7 +88,7 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
 
-        View v = context.getLayoutInflater().inflate(R.layout.stat_child,null);
+        View v = LayoutInflater.from(context).inflate(R.layout.stat_child,null);
 
         Stat s = realm.where(Stat.class).equalTo("stat_record_id",records.get(i).getId()).findAll().get(i1);
         MemberStatRecord msr = realm.where(MemberStatRecord.class).equalTo("id",s.getMember_stat_record_id()).findFirst();

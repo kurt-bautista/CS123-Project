@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_launcher"
+    android:id="@+id/activity_groups"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.grpd.secb.mngr.LauncherActivity">
+    android:paddingBottom="@dimen/no_action_bar_activity_margin"
+    android:paddingLeft="@dimen/no_action_bar_activity_margin"
+    android:paddingRight="@dimen/no_action_bar_activity_margin"
+    android:paddingTop="@dimen/no_action_bar_activity_margin"
+    tools:context="com.grpd.secb.mngr.GroupsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:titleTextColor="@android:color/white"
+        app:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Groups"
+        app:titleTextColor="@android:color/white" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/toolbar">
+
+    </FrameLayout>
 
 </RelativeLayout>
