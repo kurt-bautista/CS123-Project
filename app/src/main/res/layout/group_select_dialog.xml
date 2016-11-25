@@ -24,7 +24,8 @@
             android:id="@+id/delGroup"
             android:text="Delete Group"
             android:gravity="center_horizontal"
-            android:textSize="24sp" />
+            android:textSize="18sp"
+            tools:layout_width="match_parent" />
 
         <TextView
             android:paddingBottom="@dimen/activity_vertical_margin"
@@ -35,8 +36,9 @@
             android:text="Edit Group"
             android:gravity="center_horizontal"
             android:background="@color/colorAccent"
-            android:textSize="24sp"
-            android:textColor="@android:color/background_light" />
+            android:textSize="18sp"
+            android:textColor="@android:color/background_light"
+            tools:layout_width="match_parent" />
 
         <TextView
             android:paddingBottom="@dimen/activity_vertical_margin"
@@ -46,7 +48,8 @@
             android:id="@+id/viewGroup"
             android:text="View Group"
             android:gravity="center_horizontal"
-            android:textSize="24sp" />
+            android:textSize="18sp"
+            tools:layout_width="match_parent" />
 
     </LinearLayout>
 

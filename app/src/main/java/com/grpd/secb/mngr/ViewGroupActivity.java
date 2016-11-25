@@ -1,6 +1,7 @@
 package com.grpd.secb.mngr;
 
 import android.app.Dialog;
+import android.app.ExpandableListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,12 +9,19 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 /**
  * Created by Dion Velasco on 11/21/2016.
@@ -28,7 +36,7 @@ public class ViewGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_group);
-        TabHost tabHost = (TabHost) findViewById(R.id.TabHost);
+        final TabHost tabHost = (TabHost) findViewById(R.id.TabHost);
         tabHost.setup();
         TabHost.TabSpec tabs = tabHost.newTabSpec("tab1");
         tabs.setContent(R.id.tab1);
@@ -38,6 +46,7 @@ public class ViewGroupActivity extends AppCompatActivity {
         tabs.setContent(R.id.tab2);
         tabs.setIndicator("Stats");
         tabHost.addTab(tabs);
+
         Intent i = getIntent();
         String group_id = i.getStringExtra("id");
 
@@ -67,7 +76,7 @@ public class ViewGroupActivity extends AppCompatActivity {
         sportView.setText(realm.where(Sport.class).equalTo("id",group.getSport_id()).findFirst().getName());
 
         final ListView lv = (ListView)findViewById(R.id.memberListView);
-        lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll()));
+        lv.setAdapter(new MemberViewAdapter(this,realm.where(Member.class).equalTo("group_id",group.getId()).findAll(),MemberViewAdapter.VIEW_GROUP));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -98,6 +107,106 @@ public class ViewGroupActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        Button newStat = (Button)findViewById(R.id.newStatButton);
+        newStat.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Dialog d = new NewStatDialog(ViewGroupActivity.this,group);
+                tabHost.setCurrentTab(0);
+                d.show();
+
+            }
+        });
+
+        RealmResults<Member> memberList = realm.where(Member.class).equalTo("group_id",group.getId()).findAll();
+        ArrayList<RealmResults<MemberStatRecord>> msrList = new ArrayList<>();
+        ArrayList<RealmResults<StatRecord>> srList = new ArrayList<>();
+
+        for(Member m : memberList){
+
+            msrList.add(realm.where(MemberStatRecord.class).equalTo("member_id",m.getId()).findAll());
+
+        }
+
+        for(RealmResults<MemberStatRecord> resultList : msrList){
+
+            for(MemberStatRecord result : resultList){
+
+                srList.add(realm.where(StatRecord.class).equalTo("id",result.getStat_record_id()).findAll());
+
+            }
+
+        }
+
+        RealmList<StatRecord> statRecords = new RealmList<>();
+
+        for(RealmResults<StatRecord> srResults : srList){
+
+            for(StatRecord result : srResults){
+
+                if(!statRecords.contains(result)){
+
+                    statRecords.add(result);
+
+                }
+            }
+
+        }
+
+
+        final ExpandableListView elv = (ExpandableListView)findViewById(R.id.statRecordListView);
+        final StatRecordAdapter adapter =new StatRecordAdapter(ViewGroupActivity.this,statRecords);
+
+
+
+        elv.setAdapter(adapter);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                RealmResults<Member> memberList = realm.where(Member.class).equalTo("group_id",group.getId()).findAll();
+                ArrayList<RealmResults<MemberStatRecord>> msrList = new ArrayList<>();
+                ArrayList<RealmResults<StatRecord>> srList = new ArrayList<>();
+
+                for(Member m : memberList){
+
+                    msrList.add(realm.where(MemberStatRecord.class).equalTo("member_id",m.getId()).findAll());
+
+                }
+
+                for(RealmResults<MemberStatRecord> resultList : msrList){
+
+                    for(MemberStatRecord result : resultList){
+
+                        srList.add(realm.where(StatRecord.class).equalTo("id",result.getStat_record_id()).findAll());
+
+                    }
+
+                }
+
+                RealmList<StatRecord> statRecords = new RealmList<>();
+
+                for(RealmResults<StatRecord> srResults : srList){
+
+                    for(StatRecord result : srResults){
+
+                        if(!statRecords.contains(result)){
+
+                            statRecords.add(result);
+
+                        }
+                    }
+
+                }
+
+                adapter.getData().clear();
+                adapter.getData().addAll(statRecords);
+
+                elv.invalidateViews();
+            }
+        });
+
 
     }
 

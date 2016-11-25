@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import io.realm.Realm;
 import io.realm.RealmBaseAdapter;
 import io.realm.RealmResults;
 
@@ -55,6 +56,7 @@ public class GroupAdapter extends RealmBaseAdapter {
 
 
         groupName.setText(group.getName());
+        groupMemberCount.setText(Realm.getDefaultInstance().where(Member.class).equalTo("group_id",group.getId()).findAll().size() + " members");
         v.setTag(group);
         return v;
     }
