@@ -203,7 +203,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                     if(!id.equals("")){
 
                         long minutes, seconds;
-                        if(curMinutes != 0 && curSeconds != 0){
+                        if(curMinutes != 0 || curSeconds != 0){
 
                             minutes = ((timerSet/1000)/60)-curMinutes;
                             seconds = ((timerSet/1000)%60)-curSeconds;
@@ -246,6 +246,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
         else{
             timer.cancel();
             isActive = false;
+            System.out.println(curMinutes + " - " + curSeconds);
             startStop.setImageResource(R.drawable.ic_play_arrow_black_24dp);
         }
     }

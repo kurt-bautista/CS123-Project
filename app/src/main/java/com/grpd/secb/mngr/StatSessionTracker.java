@@ -58,6 +58,7 @@ public class StatSessionTracker{
         stat.setName(name);
         stat.setMember_stat_record_id(record.getId());
         stat.setStat_record_id(statRecord.getId());
+        stat.setRecord(data);
         realm.commitTransaction();
 
     }

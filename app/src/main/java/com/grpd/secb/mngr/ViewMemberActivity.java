@@ -2,12 +2,17 @@ package com.grpd.secb.mngr;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ExpandableListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class ViewMemberActivity extends AppCompatActivity {
 
@@ -61,6 +66,48 @@ public class ViewMemberActivity extends AppCompatActivity {
 
         }
 
+        ArrayList<RealmResults<MemberStatRecord>> msrList = new ArrayList<>();
+        ArrayList<RealmResults<StatRecord>> srList = new ArrayList<>();
+
+        msrList.add(realm.where(MemberStatRecord.class).equalTo("member_id",member.getId()).findAll());
+
+
+        for(RealmResults<MemberStatRecord> resultList : msrList){
+
+            for(MemberStatRecord result : resultList){
+
+                srList.add(realm.where(StatRecord.class).equalTo("id",result.getStat_record_id()).findAll());
+
+            }
+
+        }
+
+        RealmList<StatRecord> statRecords = new RealmList<>();
+
+        for(RealmResults<StatRecord> srResults : srList){
+
+            for(StatRecord result : srResults){
+
+                if(!statRecords.contains(result)){
+
+                    statRecords.add(result);
+
+                }
+            }
+
+        }
+
+        final ExpandableListView elv = (ExpandableListView)findViewById(R.id.viewMemberStatListView);
+        final StatRecordAdapter adapter = new StatRecordAdapter(this,statRecords);
+        elv.setAdapter(adapter);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener(){
+            @Override
+            public void onTabChanged(String s) {
+                adapter.notifyDataSetChanged();
+                elv.invalidate();
+                elv.postInvalidate();
+            }
+        });
 
     }
 }

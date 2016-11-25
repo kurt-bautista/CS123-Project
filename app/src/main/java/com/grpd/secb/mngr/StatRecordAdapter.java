@@ -90,6 +90,8 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
         TextView member = (TextView)v.findViewById(R.id.rowStatMemberTextView);
         TextView value = (TextView)v.findViewById(R.id.rowStatValueTextView);
 
+        System.out.println(s.getRecord());
+
         name.setText(s.getName());
         member.setText(mem.getName());
         value.setText(s.getRecord());
