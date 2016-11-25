@@ -20,8 +20,8 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:layout_marginTop="20sp">
@@ -50,17 +50,17 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="14sp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="Track"
-                android:minHeight="50dp"
-                style="@style/RobotoButtonStyle"
-                android:id="@+id/newStatButton"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
         </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:text="Track"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/newStatButton"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
