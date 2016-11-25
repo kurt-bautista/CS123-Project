@@ -47,18 +47,22 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
         final String[] ids = intent.getStringArrayExtra("ids");
         String title = intent.getStringExtra("title");
         final String dataName = intent.getStringExtra("dataName");
-
+        final String[] msrids = new String[2];
+        msrids[0] = ""; msrids[1] = "";
+        int count = 0;
         for(String id: ids) {
             if(!id.equals("")) {
                 realm.beginTransaction();
                 MemberStatRecord msr = realm.createObject(MemberStatRecord.class);
                 msr.setId(UUID.randomUUID().toString());
                 msr.setMember_id(id);
+                msrids[count] = msr.getId();
                 realm.commitTransaction();
             }
+            count++;
         }
 
-        tracker = new StatSessionTracker(realm.where(MemberStatRecord.class).equalTo("member_id",ids[0]).or().equalTo("member_id",ids[1]).findAll(),title);
+        tracker = new StatSessionTracker(realm.where(MemberStatRecord.class).equalTo("id",msrids[0]).or().equalTo("id",msrids[1]).findAll(),title);
 
         Button set = (Button)findViewById(R.id.setButtonTaek);
         final Button reset = (Button)findViewById(R.id.resetButtonTaek);

@@ -52,7 +52,8 @@
                 android:text="Track"
                 android:minHeight="50dp"
                 style="@style/RobotoButtonStyle"
-                android:id="@+id/newStatButton" />
+                android:id="@+id/newStatButton"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
         </LinearLayout>
 

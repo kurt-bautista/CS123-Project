@@ -125,6 +125,7 @@ public class ViewGroupActivity extends AppCompatActivity {
 
         for(Member m : memberList){
 
+            System.out.println("Data flow 1: " + m.getName());
             msrList.add(realm.where(MemberStatRecord.class).equalTo("member_id",m.getId()).findAll());
 
         }
@@ -132,6 +133,8 @@ public class ViewGroupActivity extends AppCompatActivity {
         for(RealmResults<MemberStatRecord> resultList : msrList){
 
             for(MemberStatRecord result : resultList){
+
+                System.out.println("Data flow 2: " + result);
 
                 srList.add(realm.where(StatRecord.class).equalTo("id",result.getStat_record_id()).findAll());
 
@@ -144,6 +147,8 @@ public class ViewGroupActivity extends AppCompatActivity {
         for(RealmResults<StatRecord> srResults : srList){
 
             for(StatRecord result : srResults){
+
+                System.out.println(result.getName());
 
                 if(!statRecords.contains(result)){
 

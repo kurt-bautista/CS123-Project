@@ -70,10 +70,5 @@ public class StatSessionTracker{
 
     }
 
-    public MemberStatRecord getMemberStatRecord(String member_id){
-
-        return records.where().equalTo("member_id",member_id).findFirst();
-
-    }
 
 }
