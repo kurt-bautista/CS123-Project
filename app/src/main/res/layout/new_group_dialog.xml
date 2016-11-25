@@ -40,14 +40,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView3"
                 android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                android:padding="5dp" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/sportsSpinner"
                 android:entries="@array/sports"
-                android:layout_weight="3" />
+                android:layout_weight="3"
+                android:padding="5dp" />
         </LinearLayout>
 
         <TextView
@@ -55,7 +58,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
+            android:padding="5dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -63,14 +68,18 @@
             android:inputType="textPersonName"
             android:text=""
             android:ems="10"
-            android:id="@+id/newGroupNameEditText" />
+            android:id="@+id/newGroupNameEditText"
+            android:textSize="18sp"
+            android:padding="5dp" />
 
         <TextView
             android:text="Short Description:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
+            android:padding="5dp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -78,7 +87,9 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:id="@+id/newGroupDescriptionEditText"
-            android:layout_weight="0.55" />
+            android:layout_weight="0.55"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -92,7 +103,8 @@
                 android:id="@+id/cancelButton"
                 android:layout_gravity="center"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp" />
 
             <Button
                 android:text="OK"
@@ -101,7 +113,8 @@
                 android:id="@+id/createGroupButton"
                 android:layout_gravity="center"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
 

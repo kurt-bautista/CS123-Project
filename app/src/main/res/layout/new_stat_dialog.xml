@@ -24,7 +24,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18dp"
+            android:padding="5dp"
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -32,6 +35,13 @@
             android:inputType="textPersonName"
             android:hint="Title"
             android:ems="10"
+
+            android:id="@+id/sessionTitleEditText"
+            android:layout_weight="1"
+            android:textSize="18dp"
+            android:padding="5dp"
+            android:layout_marginTop="20dp" />
+
             android:id="@+id/sessionTitleEditText"
             android:layout_weight="1" />
 
@@ -48,7 +58,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView1"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
+            android:padding="5dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -58,6 +70,7 @@
             android:ems="10"
             android:id="@+id/sessionDataEditText"
             android:layout_weight="1" />
+
 
     </LinearLayout>
 
@@ -72,13 +85,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
             android:layout_weight="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18dp"
+            android:padding="5dp" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/spinner"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:padding="5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,18 +108,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView7"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18dp"
+            android:padding="5dp" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:background="#c0c0c0"/>
+            android:background="#c0c0c0"
+            android:padding="5dp" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
+            android:padding="5dp"
             android:id="@+id/newStatMemberListView" />
+
+            android:id="@+id/newStatMemberListView" />
+
 
         <Button
             android:text="Start"

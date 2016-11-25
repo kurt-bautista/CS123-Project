@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/timerTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="36sp"
+            android:textSize="30sp"
             android:textAlignment="center"
             android:layout_margin="30dp"/>
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/counterStepsTextViewTaek"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="50sp"
+            android:textSize="54sp"
             android:layout_margin="30dp"
             android:textAlignment="center" />
 
