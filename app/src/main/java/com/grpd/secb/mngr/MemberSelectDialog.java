@@ -2,8 +2,10 @@ package com.grpd.secb.mngr;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -38,11 +40,21 @@ public class MemberSelectDialog extends Dialog {
         delMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                realm.beginTransaction();
-                Member.deleteFromRealm(realm.where(Member.class).equalTo("id",adapter.getItem(index).getId()).findFirst());
-                realm.commitTransaction();
-                adapter.notifyDataSetChanged();
-                MemberSelectDialog.this.dismiss();
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Delete Group?")
+                        .setMessage("Are you sure you want to delete this group?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                realm.beginTransaction();
+                                Member.deleteFromRealm(realm.where(Member.class).equalTo("id",adapter.getItem(index).getId()).findFirst());
+                                realm.commitTransaction();
+                                adapter.notifyDataSetChanged();
+                                MemberSelectDialog.this.dismiss();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
