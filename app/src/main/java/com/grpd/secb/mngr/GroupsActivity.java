@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class GroupsActivity extends AppCompatActivity {
@@ -45,6 +46,19 @@ public class GroupsActivity extends AppCompatActivity {
                 sport.setName(s);
             }
 
+
+        }
+
+        //make stat types here
+        if(realm.where(Sport.class).findFirst().getStat_types().size() == 0) {
+            String taekwondoId = realm.where(Sport.class).equalTo("name", "Taekwondo").findFirst().getId();
+            String swimmingId = realm.where(Sport.class).equalTo("name", "Swimming").findFirst().getId();
+
+            StatType a = realm.createObject(StatType.class, UUID.randomUUID().toString());
+            a.setPreset_name("a");
+            a.setSportId(taekwondoId);
+            a.setStat_type_code(420);
+            realm.where(Sport.class).equalTo("id", taekwondoId).findFirst().addStatType(a);
 
         }
         realm.commitTransaction();
