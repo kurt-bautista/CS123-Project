@@ -43,7 +43,7 @@ public class NewStatDialog extends Dialog {
         group = g;
         this.c = c;
         selectedMembers = new ArrayList<Member>();
-        statTypes = realm.where(Sport.class).equalTo("id", group.getId()).findFirst().getStat_types();
+        statTypes = realm.where(Sport.class).equalTo("id", group.getSport_id()).findFirst().getStat_types();
         curCount = 0;
     }
 
@@ -52,9 +52,8 @@ public class NewStatDialog extends Dialog {
         setContentView(R.layout.new_stat_dialog);
 
         final EditText title = (EditText)findViewById(R.id.sessionTitleEditText);
-        final EditText dataName = (EditText)findViewById(R.id.sessionDataEditText);
 
-        Spinner statType = (Spinner) findViewById(R.id.statTrackedSpinner);
+        final Spinner statType = (Spinner) findViewById(R.id.statTrackedSpinner);
         StatTypeSpinnerAdapter statTypeAdapter = new StatTypeSpinnerAdapter(c, statTypes);
         statType.setAdapter(statTypeAdapter);
 
@@ -97,8 +96,7 @@ public class NewStatDialog extends Dialog {
             @Override
             public void onClick(View view) {
 
-                if(title.getText().toString().trim().equals("") ||
-                        dataName.getText().toString().trim().equals("")) {
+                if(title.getText().toString().trim().equals("")) {
 
                     new AlertDialog.Builder(view.getContext())
                             .setTitle("Missing Fields")
@@ -120,7 +118,8 @@ public class NewStatDialog extends Dialog {
 
                     Intent intent = new Intent(c,TaekwondoStatTrackActivity.class);
                     intent.putExtra("ids",ids);
-                    intent.putExtra("dataName",dataName.getText().toString().trim());
+                    //intent.putExtra("dataName",statType.getSelectedItem().toString().trim());
+                    intent.putExtra("dataName","dummy");
                     intent.putExtra("title",title.getText().toString().trim());
                     c.startActivity(intent);
                     dismiss();

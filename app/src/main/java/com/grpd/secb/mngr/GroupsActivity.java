@@ -30,7 +30,7 @@ public class GroupsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Realm.init(this);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(realmConfig);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
