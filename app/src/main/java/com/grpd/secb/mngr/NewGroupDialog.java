@@ -86,7 +86,6 @@ public class NewGroupDialog extends Dialog {
                             @Override
                             public void execute(Realm realm) {
                                 Group g = realm.where(Group.class).equalTo("id",adapter.getItem(index).getId()).findFirst();
-                                //g.setId(UUID.randomUUID().toString());
                                 g.setName(name.getText().toString().trim());
                                 g.setSport_id(realm.where(Sport.class).equalTo("name",((Sport)spinner.getSelectedItem()).getName()).findFirst().getId());
                                 g.setDescription(description.getText().toString().trim());

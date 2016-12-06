@@ -9,15 +9,19 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 
 /**
  * Created by Sean on 11/22/2016.
@@ -29,6 +33,7 @@ public class NewStatDialog extends Dialog {
     private Context c;
     private Realm realm = Realm.getDefaultInstance();
     private ArrayList<Member> selectedMembers;
+    private RealmList<StatType> statTypes;
     private int maxCount = 2;
     private int curCount;
 
@@ -38,6 +43,7 @@ public class NewStatDialog extends Dialog {
         group = g;
         this.c = c;
         selectedMembers = new ArrayList<Member>();
+        statTypes = realm.where(Sport.class).equalTo("id", group.getId()).findFirst().getStat_types();
         curCount = 0;
     }
 
@@ -47,6 +53,10 @@ public class NewStatDialog extends Dialog {
 
         final EditText title = (EditText)findViewById(R.id.sessionTitleEditText);
         final EditText dataName = (EditText)findViewById(R.id.sessionDataEditText);
+
+        Spinner statType = (Spinner) findViewById(R.id.statTrackedSpinner);
+        StatTypeSpinnerAdapter statTypeAdapter = new StatTypeSpinnerAdapter(c, statTypes);
+        statType.setAdapter(statTypeAdapter);
 
         final ListView lv = (ListView)findViewById(R.id.newStatMemberListView);
         lv.setAdapter(new MemberViewAdapter(c,realm.where(Member.class).equalTo("group_id",group.getId()).findAll(),MemberViewAdapter.NEW_STAT));

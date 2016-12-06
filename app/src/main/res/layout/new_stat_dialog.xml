@@ -59,14 +59,11 @@
             android:textSize="18sp"
             android:padding="5dp" />
 
-        <EditText
+        <Spinner
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="datatype"
-            android:ems="10"
-            android:id="@+id/sessionDataEditText"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:id="@+id/statTrackedSpinner"
+            android:layout_weight="5" />
 
 
     </LinearLayout>
@@ -90,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/spinner"
-            android:layout_weight="1"
+            android:layout_weight="6"
             android:padding="5dp" />
     </LinearLayout>
 
