@@ -52,8 +52,8 @@ public class ViewMemberActivity extends AppCompatActivity {
         name.setText(member.getName());
         birthday.setText(member.getBirthday());
         age.setText(Integer.toString(member.getAge()));
-        height.setText(member.getHeight());
-        weight.setText(member.getWeight());
+        height.setText(member.getHeight() + " cm.");
+        weight.setText(member.getWeight() + " kg.");
         contact.setText(member.getContact_number());
         if(member.getOther_description().trim().equals("")){
 
