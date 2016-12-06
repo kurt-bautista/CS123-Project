@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapWords|textPersonName"
                     android:text=""
                     android:ems="10"
                     android:id="@+id/newMemberNameEditText" />
@@ -71,10 +71,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:text=""
                     android:ems="10"
                     android:id="@+id/newMemberHeightEditText" />
+
+                <TextView
+                    android:text="cm."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView15"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             </LinearLayout>
 
@@ -95,10 +102,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:text=""
                     android:ems="10"
                     android:id="@+id/newMemberWeightEditText" />
+
+                <TextView
+                    android:text="kg."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView18"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
 
             <LinearLayout
