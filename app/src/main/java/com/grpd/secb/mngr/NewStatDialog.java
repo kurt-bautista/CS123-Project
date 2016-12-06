@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -53,8 +54,12 @@ public class NewStatDialog extends Dialog {
 
         final EditText title = (EditText)findViewById(R.id.sessionTitleEditText);
 
-        final Spinner statType = (Spinner) findViewById(R.id.statTrackedSpinner);
-        StatTypeSpinnerAdapter statTypeAdapter = new StatTypeSpinnerAdapter(c, statTypes);
+        final AutoCompleteTextView statType = (AutoCompleteTextView) findViewById(R.id.statTypeAutoComplete);
+        ArrayList<String> statTypeNames = new ArrayList<>();
+        for(StatType s : statTypes) {
+            statTypeNames.add(s.getPreset_name());
+        }
+        ArrayAdapter<String> statTypeAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, statTypeNames);
         statType.setAdapter(statTypeAdapter);
 
         final ListView lv = (ListView)findViewById(R.id.newStatMemberListView);
@@ -118,7 +123,7 @@ public class NewStatDialog extends Dialog {
 
                     Intent intent = new Intent(c,TaekwondoStatTrackActivity.class);
                     intent.putExtra("ids",ids);
-                    intent.putExtra("dataName",((StatType)statType.getSelectedItem()).getPreset_name());
+                    intent.putExtra("dataName",statType.getText().toString());
                     //intent.putExtra("dataName","dummy");
                     intent.putExtra("title",title.getText().toString().trim());
                     c.startActivity(intent);

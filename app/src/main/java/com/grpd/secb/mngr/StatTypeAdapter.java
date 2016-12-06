@@ -16,12 +16,12 @@ import io.realm.RealmResults;
  * Created by kurtv on 12/6/16.
  */
 
-public class StatTypeSpinnerAdapter extends RealmBaseAdapter {
+public class StatTypeAdapter extends RealmBaseAdapter {
 
     private Context context;
     private RealmList<StatType> statTypes;
 
-    public StatTypeSpinnerAdapter(@NonNull Context context, @Nullable RealmList<StatType> statTypes) {
+    public StatTypeAdapter(@NonNull Context context, @Nullable RealmList<StatType> statTypes) {
         super(context, statTypes);
         this.context = context;
         this.statTypes = statTypes;

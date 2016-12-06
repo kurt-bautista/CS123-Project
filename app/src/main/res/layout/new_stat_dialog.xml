@@ -59,11 +59,11 @@
             android:textSize="18sp"
             android:padding="5dp" />
 
-        <Spinner
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/statTrackedSpinner"
-            android:layout_weight="5" />
+            android:layout_height="wrap_content"
+            android:id="@+id/statTypeAutoComplete"
+            android:layout_weight="6" />
 
 
     </LinearLayout>

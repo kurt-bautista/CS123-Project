@@ -55,7 +55,7 @@ public class GroupsActivity extends AppCompatActivity {
             String swimmingId = realm.where(Sport.class).equalTo("name", "Swimming").findFirst().getId();
 
             StatType a = realm.createObject(StatType.class, UUID.randomUUID().toString());
-            a.setPreset_name("a");
+            a.setPreset_name("hello world");
             a.setSportId(taekwondoId);
             a.setStat_type_code(420);
             realm.where(Sport.class).equalTo("id", taekwondoId).findFirst().addStatType(a);
