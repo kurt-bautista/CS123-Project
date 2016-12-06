@@ -118,8 +118,8 @@ public class NewStatDialog extends Dialog {
 
                     Intent intent = new Intent(c,TaekwondoStatTrackActivity.class);
                     intent.putExtra("ids",ids);
-                    //intent.putExtra("dataName",statType.getSelectedItem().toString().trim());
-                    intent.putExtra("dataName","dummy");
+                    intent.putExtra("dataName",((StatType)statType.getSelectedItem()).getPreset_name());
+                    //intent.putExtra("dataName","dummy");
                     intent.putExtra("title",title.getText().toString().trim());
                     c.startActivity(intent);
                     dismiss();

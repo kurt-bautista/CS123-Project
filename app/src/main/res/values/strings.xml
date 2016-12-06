@@ -2,8 +2,8 @@
     <string name="app_name">MNGR</string>
     <string-array name="sports">
         <item>Taekwondo</item>
-        <item>Basketball</item>
         <item>Swimming</item>
         <item>Volleyball</item>
+        <item>Basketball</item>
     </string-array>
 </resources>

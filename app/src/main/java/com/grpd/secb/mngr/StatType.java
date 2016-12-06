@@ -12,16 +12,15 @@ public class StatType extends RealmObject {
     private String id;
     private String preset_name;
     private int stat_type_code;
+    private String sport_id;
 
-    public String getSport() {
-        return sport;
+    public String getSportId() {
+        return sport_id;
     }
 
-    public void setSport(String sport) {
-        this.sport = sport;
+    public void setSportId(String id) {
+        this.sport_id = id;
     }
-
-    private String sport;
 
     public String getId() {
         return id;
