@@ -8,20 +8,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.grpd.secb.mngr.SwimmingStatTrackActivity">
+    tools:context="com.grpd.secb.mngr.LapsStatTrackActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp">
 
-        <TextView
-            android:text="TextView"
+        <Chronometer
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView12"
+            android:id="@+id/counterDisplay"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="36sp"
             android:textAlignment="center" />
@@ -31,41 +31,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:text="Button"
+            <ImageButton
+                android:src="@drawable/ic_play_arrow_black_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button7"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" />
 
-            <Button
-                android:text="Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button.Colored" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
 
             <ViewStub
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout="@layout/swimmer_row"
-                android:id="@+id/viewStub3"
+                android:id="@+id/playerStub1"
                 android:layout_gravity="center" />
 
             <ViewStub
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout="@layout/swimmer_row"
-                android:id="@+id/viewStub4"
+                android:id="@+id/playerStub2"
                 android:layout_gravity="center" />
         </LinearLayout>
 
@@ -75,18 +69,18 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:text="Button"
+                android:text="Cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button9"
+                android:id="@+id/lapCancel"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" />
 
             <Button
-                android:text="Button"
+                android:text="Save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button8"
+                android:id="@+id/lapSave"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.Colored" />
         </LinearLayout>

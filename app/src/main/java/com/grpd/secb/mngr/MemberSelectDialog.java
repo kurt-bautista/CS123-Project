@@ -41,8 +41,8 @@ public class MemberSelectDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(view.getContext())
-                        .setTitle("Delete Group?")
-                        .setMessage("Are you sure you want to delete this group?")
+                        .setTitle("Delete Member?")
+                        .setMessage("Are you sure you want to delete this member?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which){

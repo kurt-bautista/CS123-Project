@@ -96,13 +96,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="TextView"
+            android:text="Body: 0 Turning Body: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player1stats"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            tools:text="Body: 0 Turning Head: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
+            tools:text="Body: 0 Turning Body: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
             android:maxLines="10" />
 
         <Button
@@ -209,13 +209,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="TextView"
+            android:text="Body: 0 Turning Body: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player2stats"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            tools:text="Body: 0 Turning Head: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
+            tools:text="Body: 0 Turning Body: 0 Punch: 0\nHead: 0 Turning Head: 0 Kyonggo: 0"
             android:maxLines="10" />
 
         <Button
@@ -240,7 +240,7 @@
             android:text="Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/cancel"
+            android:id="@+id/taekMatchCancel"
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Colored" />
 
@@ -248,7 +248,7 @@
             android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/save"
+            android:id="@+id/taekMatchSave"
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Colored" />
     </LinearLayout>

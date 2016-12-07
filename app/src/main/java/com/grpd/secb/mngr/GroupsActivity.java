@@ -28,8 +28,6 @@ public class GroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(realmConfig);
@@ -49,18 +47,37 @@ public class GroupsActivity extends AppCompatActivity {
 
         }
 
-        //make stat types here
-        if(realm.where(Sport.class).findFirst().getStat_types().size() == 0) {
-            String taekwondoId = realm.where(Sport.class).equalTo("name", "Taekwondo").findFirst().getId();
-            String swimmingId = realm.where(Sport.class).equalTo("name", "Swimming").findFirst().getId();
+        for(Sport s: realm.where(Sport.class).findAll()){
 
-            StatType a = realm.createObject(StatType.class, UUID.randomUUID().toString());
-            a.setPreset_name("a");
-            a.setSportId(taekwondoId);
-            a.setStat_type_code(420);
-            realm.where(Sport.class).equalTo("id", taekwondoId).findFirst().addStatType(a);
+            for(String stat:getResources().getStringArray(R.array.genericStats)){
+
+                if(!s.getStat_types().contains(realm.where(StatType.class).equalTo("preset_name",stat).equalTo("sport_id",s.getId()).findFirst())){
+
+                    StatType g = realm.createObject(StatType.class,UUID.randomUUID().toString());
+                    g.setPreset_name(stat);
+                    g.setSportId(s.getId());
+                    s.addStatType(g);
+
+                }
+
+            }
+
+            for(String stat: getResources().getStringArray(getResources().getIdentifier(s.getName()+"Stats","array",getPackageName()))){
+
+                if(!s.getStat_types().contains(realm.where(StatType.class).equalTo("preset_name",stat).equalTo("sport_id",s.getId()).findFirst())){
+
+                    StatType g = realm.createObject(StatType.class,UUID.randomUUID().toString());
+                    g.setPreset_name(stat);
+                    g.setSportId(s.getId());
+                    s.addStatType(g);
+
+                }
+
+            }
 
         }
+
+        NewStatDialog.initValues();
         realm.commitTransaction();
         ListView lv = (ListView) findViewById(R.id.groupsListView);
         RealmResults<Group> groups = realm.where(Group.class).findAll();

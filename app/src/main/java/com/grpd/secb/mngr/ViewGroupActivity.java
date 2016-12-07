@@ -2,10 +2,12 @@ package com.grpd.secb.mngr;
 
 import android.app.Dialog;
 import android.app.ExpandableListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,8 +31,9 @@ import io.realm.RealmResults;
 
 public class ViewGroupActivity extends AppCompatActivity {
 
-    Realm realm;
-    Group group;
+    private Realm realm;
+    private Group group;
+    private boolean isSwitched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,7 @@ public class ViewGroupActivity extends AppCompatActivity {
 
                 Dialog d = new NewStatDialog(ViewGroupActivity.this,group);
                 tabHost.setCurrentTab(0);
+                tabHost.setCurrentTab(1);
                 d.show();
 
             }
@@ -162,12 +166,43 @@ public class ViewGroupActivity extends AppCompatActivity {
 
 
         elv.setAdapter(adapter);
+        elv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int index = i;
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("Delete Record?")
+                        .setMessage("Are you sure you want to delete this record?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                                realm.beginTransaction();
+                                for(Stat s: realm.where(Stat.class).equalTo("stat_record_id",adapter.getItem(index).getId()).findAll()){
+                                    Stat.deleteFromRealm(s);
+                                }
+                                StatRecord.deleteFromRealm(realm.where(StatRecord.class).equalTo("id",adapter.getItem(index).getId()).findFirst());
+                                realm.commitTransaction();
+                                adapter.notifyDataSetChanged();
+                                tabHost.setCurrentTab(0);
+                                tabHost.setCurrentTab(1);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            return true;
+            }
+        });
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String s) {
                 RealmResults<Member> memberList = realm.where(Member.class).equalTo("group_id",group.getId()).findAll();
                 ArrayList<RealmResults<MemberStatRecord>> msrList = new ArrayList<>();
                 ArrayList<RealmResults<StatRecord>> srList = new ArrayList<>();
+
+                if(isSwitched){
+                    tabHost.setCurrentTab(1);
+                    isSwitched = false;
+                }
 
                 for(Member m : memberList){
 

@@ -2,22 +2,17 @@ package com.grpd.secb.mngr;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.CountDownTimer;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -25,7 +20,7 @@ import java.util.UUID;
 
 import io.realm.Realm;
 
-public class TaekwondoStatTrackActivity extends AppCompatActivity implements View.OnClickListener{
+public class TimerCounterStatTrackActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Realm realm = Realm.getDefaultInstance();
     private StatSessionTracker tracker;
@@ -98,12 +93,12 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
             @Override
             public void onClick(View view) {
                 if(!isActive) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(TaekwondoStatTrackActivity.this);
+                    AlertDialog.Builder alert = new AlertDialog.Builder(TimerCounterStatTrackActivity.this);
 
                     alert.setTitle("Set Timer");
                     alert.setMessage("Input Countdown length in seconds:");
 
-                    final EditText input = new EditText(TaekwondoStatTrackActivity.this);
+                    final EditText input = new EditText(TimerCounterStatTrackActivity.this);
                     input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     alert.setView(input);
 
@@ -131,7 +126,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
                                 };
                             } else {
 
-                                Toast.makeText(TaekwondoStatTrackActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TimerCounterStatTrackActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -193,7 +188,7 @@ public class TaekwondoStatTrackActivity extends AppCompatActivity implements Vie
             @Override
             public void onClick(View view) {
                 tracker.deleteSession();
-                TaekwondoStatTrackActivity.this.finish();
+                TimerCounterStatTrackActivity.this.finish();
             }
         });
 

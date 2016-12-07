@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.grpd.secb.mngr.TaekwondoStatTrackActivity">
+    tools:context="com.grpd.secb.mngr.TimerCounterStatTrackActivity">
 
     <LinearLayout
         android:orientation="vertical"

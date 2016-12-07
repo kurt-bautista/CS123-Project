@@ -26,6 +26,12 @@ public class StatRecordAdapter extends BaseExpandableListAdapter {
         this.context = context;
     }
 
+    public StatRecord getItem(int position){
+
+        return records.get(position);
+
+    }
+
     @Override
     public int getGroupCount() {
         return records.size();

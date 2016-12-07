@@ -6,4 +6,22 @@
         <item>Volleyball</item>
         <item>Basketball</item>
     </string-array>
+    <string-array name = "genericStats">
+        <item>Jumping Jacks</item>
+        <item>Push Ups</item>
+        <item>Hits</item>
+        <item>Steps</item>
+    </string-array>
+    <string-array name = "TaekwondoStats">
+        <item>TaekStat</item>
+    </string-array>
+    <string-array name = "SwimmingStats">
+        <item>SwimStat</item>
+    </string-array>
+    <string-array name = "VolleyballStats">
+        <item>VolleyStat</item>
+    </string-array>
+    <string-array name = "BasketballStats">
+        <item>BasketStat</item>
+    </string-array>
 </resources>
