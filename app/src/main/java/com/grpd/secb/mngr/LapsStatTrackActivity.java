@@ -12,7 +12,10 @@ import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -22,6 +25,7 @@ public class LapsStatTrackActivity extends AppCompatActivity implements View.OnC
     private Realm realm = Realm.getDefaultInstance();
     private StatSessionTracker tracker;
     private String curTime;
+    private String lastTime;
     private ImageButton startStop;
     private boolean isActive = false;
     private int player1Laps = 0;
@@ -87,14 +91,56 @@ public class LapsStatTrackActivity extends AppCompatActivity implements View.OnC
                             tempList = player2Times;
 
                         }
+                        String countTime = curTime;
 
                         if(lapCount > 1){
 
                             tempList.add(lapTime.getText().toString());
 
-                        }
-                        lapTime.setText("Lap " + lapCount + ": " + curTime);
+                            Scanner s1 = new Scanner(lastTime);
+                            Scanner s2 = new Scanner(curTime);
+                            s1.useDelimiter(":");
+                            s2.useDelimiter(":");
 
+                            int min1 = s1.nextInt();
+                            int sec1 = s1.nextInt();
+                            int millis1 = s1.nextInt();
+                            int min2 = s2.nextInt();
+                            int sec2 = s2.nextInt();
+                            int millis2 = s2.nextInt();
+                            int min3 = min2 - min1;
+                            int sec3 = 0;
+                            if(sec1 > sec2){
+
+                                sec3 = (sec2+60)-sec1;
+                                min3--;
+                            }
+                            else{
+
+                                sec3 = sec2-sec1;
+
+                            }
+                            int millis3 = 0;
+                            if(millis1 > millis2){
+
+                                millis3 = (millis2+100) - millis1;
+                                sec3--;
+
+                            }
+                            else{
+
+                                millis3 = millis2-millis1;
+
+                            }
+
+                            NumberFormat f = new DecimalFormat("00");
+                            countTime = f.format(min3) + ":" + f.format(sec3) + ":" + f.format(millis3);
+
+                        }
+
+
+                        lapTime.setText("Lap " + lapCount + ": " + countTime);
+                        lastTime = curTime;
                     }
                 });
 
