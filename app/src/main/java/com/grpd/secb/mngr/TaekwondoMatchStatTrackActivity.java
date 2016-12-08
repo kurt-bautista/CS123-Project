@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -64,7 +65,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Body");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1turningbody = (Button) findViewById(R.id.player1turningbody);
@@ -72,7 +73,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Turning Body");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1punch = (Button) findViewById(R.id.player1punch);
@@ -80,7 +81,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Punch");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1head = (Button) findViewById(R.id.player1head);
@@ -88,7 +89,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Head");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1turninghead = (Button) findViewById(R.id.player1turninghead);
@@ -96,7 +97,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Turning Head");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1kyonggo = (Button) findViewById(R.id.player1kyonggo);
@@ -104,15 +105,17 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(1, "Kyonggo");
-                updateStat(1);
+                updateStat();
             }
         });
         Button player1undo = (Button) findViewById(R.id.player1undo);
         player1undo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                player1stats.remove(player1stats.size() - 1);
-                updateStat(1);
+                if(player1stats.size() > 0) {
+                    player1stats.remove(player1stats.size() - 1);
+                    updateStat();
+                }
             }
         });
 
@@ -121,7 +124,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Body");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2turningbody = (Button) findViewById(R.id.player2turningbody);
@@ -129,7 +132,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Turning Body");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2punch = (Button) findViewById(R.id.player2punch);
@@ -137,7 +140,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Punch");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2head = (Button) findViewById(R.id.player2head);
@@ -145,7 +148,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Head");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2turninghead = (Button) findViewById(R.id.player2turninghead);
@@ -153,7 +156,7 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Turning Head");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2kyonggo = (Button) findViewById(R.id.player2kyonggo);
@@ -161,15 +164,17 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 addStat(2, "Kyonggo");
-                updateStat(2);
+                updateStat();
             }
         });
         Button player2undo = (Button) findViewById(R.id.player2undo);
         player2undo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                player2stats.remove(player2stats.size() - 1);
-                updateStat(2);
+                if(player2stats.size() > 0) {
+                    player2stats.remove(player2stats.size() - 1);
+                    updateStat();
+                }
             }
         });
 
@@ -241,13 +246,19 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
         }
     }
 
-    public void updateStat(int playerNumber){
-        int bodyCount = 0;
-        int turningBodyCount = 0;
-        int punchCount = 0;
-        int headCount = 0;
-        int turningHeadCount = 0;
-        int kyonggoCount = 0;
+    public void updateStat(){
+        int bodyCount1 = 0;
+        int turningBodyCount1 = 0;
+        int punchCount1 = 0;
+        int headCount1 = 0;
+        int turningHeadCount1 = 0;
+        int kyonggoCount1 = 0;
+        int bodyCount2 = 0;
+        int turningBodyCount2 = 0;
+        int punchCount2 = 0;
+        int headCount2 = 0;
+        int turningHeadCount2 = 0;
+        int kyonggoCount2 = 0;
 
         int player1extrapoints = 0;
         int player2extrapoints = 0;
@@ -257,52 +268,50 @@ public class TaekwondoMatchStatTrackActivity extends AppCompatActivity{
         TextView player1scoreTextView = (TextView) findViewById(R.id.player1score);
         TextView player2scoreTextView = (TextView) findViewById(R.id.player2score);
 
-        if(playerNumber==1) {
-            for(int i = 0; i < player1stats.size(); i++){
-                if(player1stats.get(i) == "Body") {
-                    bodyCount++;
-                } else if (player1stats.get(i) == "Turning Body"){
-                    turningBodyCount++;
-                } else if (player1stats.get(i) == "Punch"){
-                    punchCount++;
-                } else if (player1stats.get(i) == "Head"){
-                    headCount++;
-                } else if (player1stats.get(i) == "Turning Head"){
-                    turningHeadCount++;
-                } else if (player1stats.get(i) == "Kyonggo"){
-                    kyonggoCount++;
-                }
+        for(int i = 0; i < player1stats.size(); i++){
+            if(player1stats.get(i) == "Body") {
+                bodyCount1++;
+            } else if (player1stats.get(i) == "Turning Body"){
+                turningBodyCount1++;
+            } else if (player1stats.get(i) == "Punch"){
+                punchCount1++;
+            } else if (player1stats.get(i) == "Head"){
+                headCount1++;
+            } else if (player1stats.get(i) == "Turning Head"){
+                turningHeadCount1++;
+            } else if (player1stats.get(i) == "Kyonggo"){
+                kyonggoCount1++;
             }
-            player1statsTextView.setText("Body: "+bodyCount+" Turning Body: "+turningBodyCount+" Punch: "+punchCount+"\n"+
-                    "Head: "+headCount+" Turning Head: "+turningHeadCount+" Kyonggo: "+kyonggoCount);
-            player1score = punchCount + bodyCount + (3 * turningBodyCount) + (3 * headCount) + (4 * turningHeadCount);
-            player1scoreTextView.setText("Score: "+player1score);
-            player2extrapoints = (int) (kyonggoCount/2);
-            player2score += player2extrapoints;
-            player2scoreTextView.setText("Score: "+player2score);
-        } else {
-            for(int i = 0; i < player2stats.size(); i++){
-                if(player2stats.get(i) == "Body") {
-                    bodyCount++;
-                } else if (player2stats.get(i) == "Turning Body"){
-                    turningBodyCount++;
-                } else if (player2stats.get(i) == "Punch"){
-                    punchCount++;
-                } else if (player2stats.get(i) == "Head"){
-                    headCount++;
-                } else if (player2stats.get(i) == "Turning Head"){
-                    turningHeadCount++;
-                } else if (player2stats.get(i) == "Kyonggo"){
-                    kyonggoCount++;
-                }
-            }
-            player2statsTextView.setText("Body: "+bodyCount+" Turning Body: "+turningBodyCount+" Punch: "+punchCount+"\n"+
-                    "Head: "+headCount+" Turning Head: "+turningHeadCount+" Kyonggo: "+kyonggoCount);
-            player2score = punchCount + bodyCount + (3 * turningBodyCount) + (3 * headCount) + (4 * turningHeadCount);
-            player2scoreTextView.setText("Score: "+player2score);
-            player1extrapoints = (int) (kyonggoCount/2);
-            player1score += player1extrapoints;
-            player1scoreTextView.setText("Score: "+player1score);
         }
+        player1statsTextView.setText("Body: "+bodyCount1+" Turning Body: "+turningBodyCount1+" Punch: "+punchCount1+"\n"+
+                "Head: "+headCount1+" Turning Head: "+turningHeadCount1+" Kyonggo: "+kyonggoCount1);
+        player1score = punchCount1 + bodyCount1 + (3 * turningBodyCount1) + (3 * headCount1) + (4 * turningHeadCount1);
+
+        for(int i = 0; i < player2stats.size(); i++){
+            if(player2stats.get(i) == "Body") {
+                bodyCount2++;
+            } else if (player2stats.get(i) == "Turning Body"){
+                turningBodyCount2++;
+            } else if (player2stats.get(i) == "Punch"){
+                punchCount2++;
+            } else if (player2stats.get(i) == "Head"){
+                headCount2++;
+            } else if (player2stats.get(i) == "Turning Head"){
+                turningHeadCount2++;
+            } else if (player2stats.get(i) == "Kyonggo"){
+                kyonggoCount2++;
+            }
+        }
+        player2statsTextView.setText("Body: "+bodyCount2+" Turning Body: "+turningBodyCount2+" Punch: "+punchCount2+"\n"+
+                "Head: "+headCount2+" Turning Head: "+turningHeadCount2+" Kyonggo: "+kyonggoCount2);
+        player2score = punchCount2 + bodyCount2 + (3 * turningBodyCount2) + (3 * headCount2) + (4 * turningHeadCount2);
+
+        player1extrapoints = (int) (kyonggoCount2/2);
+        player1score += player1extrapoints;
+        player2extrapoints = (int) (kyonggoCount1/2);
+        player2score += player2extrapoints;
+
+        player1scoreTextView.setText("Score: "+player1score);
+        player2scoreTextView.setText("Score: "+player2score);
     }
 }
