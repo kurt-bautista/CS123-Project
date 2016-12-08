@@ -92,7 +92,7 @@ public class NewMemberDialog extends Dialog{
 
                 Calendar c = Calendar.getInstance();
 
-                DatePickerDialog d = new DatePickerDialog(getContext(),mListener,c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog d = new DatePickerDialog(getContext(),mListener,2000,c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
                 d.show();
 
             }

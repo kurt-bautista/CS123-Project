@@ -118,7 +118,6 @@ public class ViewGroupActivity extends AppCompatActivity {
 
                 Dialog d = new NewStatDialog(ViewGroupActivity.this,group);
                 tabHost.setCurrentTab(0);
-                tabHost.setCurrentTab(1);
                 d.show();
 
             }
